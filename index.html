@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Germán Ramos Ruiz</title>
+<meta name="description" content="Germán Ramos Ruiz, architect and researcher at the School of Architecture, Universidad de Navarra: building energy simulation, optimisation, climate data and concrete.">
+<meta property="og:title" content="Germán Ramos Ruiz">
+<meta property="og:description" content="Research, publications and browser tools for building energy simulation and climate analysis.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%232F6B5F' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F3F4F1;      /* concrete white */
+  --ink: #1E2326;        /* graphite */
+  --muted: #5C6468;
+  --rule: #D3D8D3;
+  --accent: #2F6B5F;     /* verdigris, oxidised copper */
+  --night: #2A3342;      /* ring: sun below the horizon */
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --wrap: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #172026; --ink: #E5E8E3; --muted: #A2ABAC; --rule: #2C373D; --accent: #86C3B1; --night: #26303D;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 19px/1.62 var(--serif); font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 32px; }
+
+/* ---------------------------------------------------------------- header */
+header.top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; }
+.bar nav, .bar .profiles { display: flex; gap: 26px; font: 400 15px/1 var(--sans); letter-spacing: .02em; }
+.bar nav a, .bar .profiles a { color: var(--ink); text-decoration: none; padding: 8px 0; border-bottom: 1px solid transparent; white-space: nowrap; }
+.bar nav a:hover, .bar nav a[aria-current="true"] { border-bottom-color: var(--ink); }
+.bar .profiles { gap: 20px; }
+.bar .profiles a { color: var(--muted); }
+.bar .profiles a:hover { color: var(--accent); }
+
+/* ------------------------------------------------------------------ hero */
+.hero { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 72px; align-items: center; padding: 80px 0 96px; }
+.portrait { margin: 0; text-align: center; }
+.ring { position: relative; width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: 1; }
+.ring svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ring .photo {
+  position: absolute; left: 50%; top: 50%; width: 55%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border-radius: 50%; overflow: hidden; background: var(--night);
+  display: grid; place-items: center;
+}
+.ring .photo span { font: 300 64px/1 var(--serif); color: #F6EBC8; letter-spacing: .04em; }
+.ring .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ring text { font: 400 11px var(--sans); fill: var(--muted); letter-spacing: .04em; }
+.sector { opacity: 1; transition: opacity .5s ease-out; }
+.ring.pending .sector { opacity: 0; }
+.ring svg:hover .sector { opacity: .55; }
+.ring svg .sector:hover { opacity: 1; }
+.name { font: 400 clamp(32px, 3.3vw, 46px)/1.05 var(--serif); white-space: nowrap; font-variation-settings: "opsz" 72; letter-spacing: -.012em; margin: 30px 0 8px; }
+.affil { font: 400 15px/1.4 var(--sans); color: var(--muted); letter-spacing: .02em; margin: 0; }
+.legend { font: 400 13px/1.45 var(--sans); color: var(--muted); margin: 18px auto 0; max-width: 34ch; min-height: 2.9em; }
+
+.intro p { margin: 0 0 1em; max-width: 36em; }
+.intro .lead { font-size: 25px; line-height: 1.45; font-variation-settings: "opsz" 36; }
+.contact { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 30px; font: 400 15px/1 var(--sans); letter-spacing: .02em; }
+.contact a { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+
+/* -------------------------------------------------------------- sections */
+.sec { display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding: 64px 0; border-top: 1px solid var(--rule); }
+.sec h2 { font: 400 30px/1.15 var(--serif); font-variation-settings: "opsz" 48; margin: 0; letter-spacing: -.005em; }
+.sec h2 + p.note { font: 400 14px/1.45 var(--sans); color: var(--muted); margin: 10px 0 0; letter-spacing: .01em; }
+.body { max-width: 680px; }
+.body > p { margin: 0 0 1em; }
+
+/* apps and projects: an index, one entry per line of work */
+.index { list-style: none; margin: 0; padding: 0; }
+.index li { padding: 0 0 28px; margin: 0 0 28px; border-bottom: 1px solid var(--rule); }
+.index li:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.index h3 { font: 400 26px/1.2 var(--serif); font-variation-settings: "opsz" 40; margin: 0 0 6px; }
+.index h3 a { color: var(--ink); text-decoration: none; }
+.index h3 a:hover { color: var(--accent); }
+.index p { margin: 0 0 12px; }
+.index .links { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 400 15px/1.3 var(--sans); letter-spacing: .02em; }
+.index .what { font: 400 14px/1.3 var(--sans); color: var(--muted); letter-spacing: .02em; margin: 0 0 8px; }
+.app-open { color: var(--paper); background: var(--accent); text-decoration: none; padding: 9px 16px 10px; border-radius: 999px; }
+.app-open:hover { background: var(--ink); }
+.links a:not(.app-open) { align-self: center; }
+
+dl.topics { margin: 0; }
+dl.topics dt { font-style: italic; font-size: 21px; margin: 0 0 4px; }
+dl.topics dd { margin: 0 0 22px; color: var(--ink); }
+dl.topics dd:last-child { margin-bottom: 0; }
+.empty { color: var(--muted); font-style: italic; }
+
+footer { border-top: 1px solid var(--rule); padding: 32px 0 48px; font: 400 14px/1.5 var(--sans); color: var(--muted); letter-spacing: .01em; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 32px; }
+
+/* ---------------------------------------------------------------- mobile */
+@media (max-width: 900px) {
+  .bar { flex-direction: column; align-items: stretch; gap: 0; padding: 6px 0; }
+  header.top { position: static; }
+  html { scroll-padding-top: 16px; }
+  .bar nav { flex-wrap: wrap; gap: 4px 20px; padding: 6px 0; }
+  .bar .profiles { flex-wrap: wrap; gap: 4px 18px; font-size: 13px; padding-bottom: 6px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 64px; }
+  .ring { max-width: 340px; }
+  .sec { grid-template-columns: 1fr; gap: 20px; padding: 48px 0; }
+}
+@media (max-width: 520px) {
+  .wrap { padding: 0 16px; }
+  body { font-size: 18px; }
+  .intro .lead { font-size: 21px; }
+  .ring .photo span { font-size: 48px; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap bar">
+    <nav aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+      <a href="#cv">CV</a>
+    </nav>
+    <div class="profiles" aria-label="Profiles">
+      <a href="https://github.com/GermanRR">GitHub</a>
+      <a href="#" data-todo="https://www.researchgate.net/profile/German-Ramos-2">ResearchGate</a>
+      <a href="https://orcid.org/0000-0002-6585-2197">ORCID</a>
+      <a href="https://www.unav.edu/web/investigacion/nuestros-investigadores/detalle-investigadores-cv?investigadorId=67154">Universidad de Navarra</a>
+      <a href="#" data-todo="https://es.linkedin.com/in/german-ramos-ruiz-69400b94">LinkedIn</a>  <!-- TODO: your LinkedIn URL -->
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-label="Introduction">
+    <figure class="portrait">
+      <div class="ring pending" id="ring">
+        <svg viewBox="0 0 400 400" role="img" aria-labelledby="ringdesc"><desc id="ringdesc">Ring diagram of the height of the sun in Pamplona for every hour of the day (around the circle, noon at the top) and every month (January inside, December outside).</desc></svg>
+        <div class="photo">
+          <span aria-hidden="true">GR</span>
+          <!-- Put your portrait next to this page as photo.jpg (square, at least 600 × 600 px) -->
+          <img src="photo.jpg" alt="Portrait of Germán Ramos Ruiz" onerror="this.remove()">
+        </div>
+      </div>
+      <h1 class="name">Germán Ramos Ruiz</h1>
+      <p class="affil">School of Architecture, Universidad de Navarra</p>
+      <figcaption class="legend" id="legend" aria-live="polite"></figcaption>
+    </figure>
+
+    <div class="intro">
+      <p class="lead">I am an architect, and I teach and do research at the School of Architecture of the Universidad de Navarra in Pamplona.</p>
+      <p>My work sits between building physics and data: energy simulation with EnergyPlus and OpenStudio, multi-objective optimisation, climate data for design, and the performance of concrete and high-performance industrial floors.</p>
+      <p>On this site you will find my research and publications, and the small browser tools I build for my students.</p>
+      <div class="contact">
+        <a href="#apps">Browser apps</a>
+        <a href="https://orcid.org/0000-0002-6585-2197">Publications on ORCID</a>
+        <a href="mailto:gramrui@unav.es">gramrui@unav.es</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="apps" aria-labelledby="h-apps">
+    <div><h2 id="h-apps">Browser apps</h2><p class="note">They run in the browser: nothing to install, and your files never leave your computer.</p></div>
+    <div class="body">
+      <ul class="index">
+        <li>
+          <h3><a href="epw-climate-analyzer/">EPW Climate Analyzer</a></h3>
+          <p>Reads an EnergyPlus weather file, hourly or every 10 minutes, and draws the design conditions sheet of the IDAE guides, wind roses, a psychrometric chart, degree-days, hour-by-month tables and heat and cold waves. A world map lists about 100,000 free weather files from Climate.OneBuilding.Org and EnergyPlus.net.</p>
+          <div class="links">
+            <a class="app-open" href="epw-climate-analyzer/">Open the app</a>
+            <!-- <a href="https://github.com/GermanRR/REPOSITORY">Source code</a> -->
+          </div>
+        </li>
+        <!-- To add an app, copy the <li> above and change the folder, the title and the text. -->
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="research" aria-labelledby="h-research">
+    <div><h2 id="h-research">Research</h2></div>
+    <div class="body">
+      <dl class="topics">
+        <dt>Building energy simulation</dt>
+        <dd>Detailed models in EnergyPlus and OpenStudio to understand how buildings use energy, and to design them so that they need less.</dd>
+        <dt>Optimisation and decision</dt>
+        <dd>Multi-objective optimisation with evolutionary algorithms, coupled to simulation, and multi-criteria methods to choose among the resulting designs.</dd>
+        <dt>Climate data for design</dt>
+        <dd>Weather files, their analysis and their limits: what a typical year hides about extremes, and how local measurements can improve it.</dd>
+        <dt>Materials</dt>
+        <dd>Concrete technology, high-performance industrial floors and phase change materials for thermal storage.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="publications" aria-labelledby="h-publications">
+    <div><h2 id="h-publications">Publications</h2></div>
+    <div class="body">
+      <p>The complete and current list of my papers is kept on ORCID and in my university CV.</p>
+      <div class="contact" style="margin-top:0">
+        <a href="https://orcid.org/0000-0002-6585-2197">ORCID</a>
+        <a href="https://www.unav.edu/web/investigacion/nuestros-investigadores/detalle-investigadores-cv?investigadorId=67154">Universidad de Navarra CV</a>
+        <a href="#" data-todo="ResearchGate profile URL">ResearchGate</a>
+      </div>
+      <!-- Selected publications: one <p> per paper, e.g.
+      <p>Authors (Year). Title. <i>Journal</i>, volume, pages. <a href="https://doi.org/...">doi</a></p> -->
+    </div>
+  </section>
+
+  <section class="sec" id="projects" aria-labelledby="h-projects">
+    <div><h2 id="h-projects">Projects</h2></div>
+    <div class="body">
+      <ul class="index">
+        <li>
+          <p class="what">Teaching tools for OpenStudio</p>
+          <h3><a href="https://github.com/GermanRR/energyplus-tools">energyplus-tools</a></h3>
+          <p>OpenStudio measures written in Python: ideal loads with all their parameters, building energy demand broken down by component, ground characteristics and thermal transmittance reports.</p>
+          <div class="links"><a href="https://github.com/GermanRR/energyplus-tools">Repository on GitHub</a></div>
+        </li>
+        <!-- To add a project, copy the <li> above. -->
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="blog" aria-labelledby="h-blog">
+    <div><h2 id="h-blog">Blog</h2></div>
+    <div class="body"><p class="empty">No posts yet. Notes on simulation, climate data and teaching will appear here.</p></div>
+  </section>
+
+  <section class="sec" id="about" aria-labelledby="h-about">
+    <div><h2 id="h-about">About</h2></div>
+    <div class="body">
+      <p>I trained as an architect. I teach at the School of Architecture of the Universidad de Navarra, where I direct the Department of Building Construction, Services and Structures.</p>
+      <p>I like tools that show how things work, so that the people who use them can understand and defend their results. Most of what I build is in Python and runs on open software.</p>
+      <p>Contact: <a href="mailto:gramrui@unav.es">gramrui@unav.es</a>. School of Architecture, Universidad de Navarra, Pamplona, Spain.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="cv" aria-labelledby="h-cv">
+    <div><h2 id="h-cv">CV</h2></div>
+    <div class="body">
+      <p>My academic CV, with projects, teaching and publications, is published by the Universidad de Navarra.</p>
+      <div class="contact" style="margin-top:0">
+        <a href="https://www.unav.edu/web/investigacion/nuestros-investigadores/detalle-investigadores-cv?investigadorId=67154">Open the CV</a>
+        <!-- <a href="cv.pdf">Download the CV as PDF</a> -->
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Germán Ramos Ruiz</span>
+    <span>The ring shows the sun's height in Pamplona (42.82° N, 1.64° W), computed with the NOAA solar position equations.</span>
+  </div>
+</footer>
+
+<script>
+/* Daylight ring: height of the sun in Pamplona for every month (rings, January inside) and hour (around, noon at the
+   top), on the 15th of each month at the middle of each hour, in local standard time (CET, UTC+1, no summer time).
+   Solar position: NOAA general solar position equations (declination and equation of time by Spencer, 1971). */
+(function () {
+  const LAT = 42.82, LON = -1.64, TZ = 1, DEG = Math.PI / 180;
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const DOY15 = [15, 46, 74, 105, 135, 166, 196, 227, 258, 288, 319, 349];
+  function altitude(doy, hour) {
+    const g = 2 * Math.PI / 365 * (doy - 1 + (hour - 12) / 24);
+    const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    const eqt = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    const ha = ((hour * 60 + eqt + 4 * LON - 60 * TZ) / 4 - 180) * DEG;
+    const cz = Math.sin(LAT * DEG) * Math.sin(decl) + Math.cos(LAT * DEG) * Math.cos(decl) * Math.cos(ha);
+    return 90 - Math.acos(Math.max(-1, Math.min(1, cz))) / DEG;
+  }
+  // colour by sun height: night, twilight, then from dawn rose to the pale high sun
+  const DARK = matchMedia("(prefers-color-scheme: dark)").matches;
+  const STOPS = [[-18, DARK ? [48, 60, 78] : [38, 46, 61]], [-6, [52, 57, 92]], [0, [176, 97, 112]], [12, [222, 137, 90]], [30, [236, 186, 98]], [50, [244, 219, 146]], [72, [250, 241, 208]]];
+  function colour(a) {
+    if (a <= STOPS[0][0]) return `rgb(${STOPS[0][1]})`;
+    for (let i = 1; i < STOPS.length; i++) if (a <= STOPS[i][0]) {
+      const [a0, c0] = STOPS[i - 1], [a1, c1] = STOPS[i], t = (a - a0) / (a1 - a0);
+      return `rgb(${c0.map((v, k) => Math.round(v + (c1[k] - v) * t))})`;
+    }
+    return `rgb(${STOPS[STOPS.length - 1][1]})`;
+  }
+  const svg = document.querySelector("#ring svg"), NS = "http://www.w3.org/2000/svg", C = 200, R0 = 122, R1 = 192, band = (R1 - R0) / 12;
+  const pt = (r, a) => [C + r * Math.sin(a), C - r * Math.cos(a)];
+  const angle = h => ((h * 15 + 180) % 360) * DEG;  // clockwise from the top, midnight at the bottom
+  const g = document.createElementNS(NS, "g");
+  for (let m = 0; m < 12; m++) for (let h = 0; h < 24; h++) {
+    const r1 = R0 + m * band + 0.5, r2 = R0 + (m + 1) * band - 0.5, a1 = angle(h) + 0.6 * DEG, a2 = angle(h) + 14.4 * DEG;
+    const [x1, y1] = pt(r2, a1), [x2, y2] = pt(r2, a2), [x3, y3] = pt(r1, a2), [x4, y4] = pt(r1, a1);
+    const alt = altitude(DOY15[m], h + 0.5), p = document.createElementNS(NS, "path");
+    p.setAttribute("d", `M${x1.toFixed(2)},${y1.toFixed(2)}A${r2},${r2} 0 0 1 ${x2.toFixed(2)},${y2.toFixed(2)}L${x3.toFixed(2)},${y3.toFixed(2)}A${r1},${r1} 0 0 0 ${x4.toFixed(2)},${y4.toFixed(2)}Z`);
+    p.setAttribute("fill", colour(alt)); p.setAttribute("class", "sector");
+    p.style.transitionDelay = `${120 + m * 70}ms`;
+    p.dataset.info = alt > 0
+      ? `${MONTHS[m]}, ${String(h).padStart(2, "0")}:00 to ${String(h + 1).padStart(2, "0")}:00: the sun is ${Math.round(alt)}° above the horizon`
+      : `${MONTHS[m]}, ${String(h).padStart(2, "0")}:00 to ${String(h + 1).padStart(2, "0")}:00: the sun is below the horizon`;
+    g.appendChild(p);
+  }
+  svg.appendChild(g);
+  for (const [h, label] of [[0, "0 h"], [6, "6 h"], [12, "12 h"], [18, "18 h"]]) {
+    const [x, y] = pt(R1 + 13, angle(h)), t = document.createElementNS(NS, "text");
+    t.setAttribute("x", x.toFixed(1)); t.setAttribute("y", y.toFixed(1)); t.setAttribute("text-anchor", "middle"); t.setAttribute("dominant-baseline", "middle");
+    t.textContent = label; svg.appendChild(t);
+  }
+  const legend = document.getElementById("legend"), rest = "Daylight in Pamplona: height of the sun by hour (around) and month (January inside, December outside).";
+  legend.textContent = rest;
+  g.addEventListener("pointerover", e => { if (e.target.dataset.info) legend.textContent = e.target.dataset.info + "."; });
+  g.addEventListener("pointerleave", () => { legend.textContent = rest; });
+  requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById("ring").classList.remove("pending")));
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) g.querySelectorAll(".sector").forEach(p => { p.style.transition = "none"; });
+})();
+
+/* underline the section being read in the header */
+(function () {
+  const links = [...document.querySelectorAll(".bar nav a")], byId = new Map(links.map(a => [a.hash.slice(1), a]));
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { links.forEach(a => a.removeAttribute("aria-current")); byId.get(e.target.id)?.setAttribute("aria-current", "true"); }
+  }), {rootMargin: "-45% 0px -50% 0px"});
+  byId.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+})();
+</script>
+</body>
+</html>
