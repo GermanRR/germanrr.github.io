@@ -1,2 +1,2 @@
-# GermanRR.github.io
+# germanrr.github.io
 My personal page
